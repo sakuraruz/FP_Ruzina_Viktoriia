@@ -32,6 +32,26 @@ myHead (x:xs) = x
 
 myTail :: [a] -> [a]
 myTail (x:xs) = xs
+
+myTake :: Int -> [a] -> [a]
+myTake 0 _ = []
+myTake _ [] = []
+myTake n (x:xs) = x : myTake (n-1) xs
+
+myDrop :: Int -> [a] -> [a]
+myDrop 0 xs = xs
+myDrop _ [] = []
+myDrop n (x:xs) = myDrop (n-1) xs
+
+myProduct :: [Int] -> Int
+myProduct [] = 1
+myProduct (x:xs) = x * (myProduct xs)
+
+myZip3 :: [a] -> [b] -> [c] -> [(a, b, c)]
+myZip3 [] _ _ = []
+myZip3 _ [] _ = []
+myZip3 _ _ [] = []
+myZip3 (x:xs) (y:ys) (z:zs) = (x, y, z) : myZip3 xs ys zs
 {-
 
 Напишите реализацию функций myFST, mySND, myTHRD для кортежа (a,b,c)
