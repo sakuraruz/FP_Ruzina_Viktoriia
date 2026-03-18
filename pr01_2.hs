@@ -4,6 +4,13 @@
 
 module Pr01_2 where
 
+myZipSave :: [a] -> [b] -> ([(a, b)], Either [a] [b])
+myZipSave [] ys = ([], Right ys)
+myZipSave xs [] = ([], Left xs)
+myZipSave (x:xs) (y:ys) = ((x,y):pairs, remainder)
+  where
+    (pairs, remainder) = myZipSave xs ys
+
 {-
 
 Напишите реализацию функций:
