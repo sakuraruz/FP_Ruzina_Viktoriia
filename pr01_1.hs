@@ -57,6 +57,36 @@ myUnzip :: [(a, b)] -> ([a], [b])
 myUnzip [] = ([], [])
 myUnzip ((x, y) : xys) = (x : xs, y : ys)
     where (xs, ys) = myUnzip xys
+
+myFilter :: (a -> Bool) -> [a] -> [a]
+myFilter _ [] = []
+myFilter pred (x : xs) | pred x = x : myFilter pred xs
+                       | otherwise = myFilter pred xs
+
+myFilter2 :: (a -> Bool) -> [a] -> [a]
+myFilter2 _ [] = []
+myFilter2 pred (x : xs) = if pred x
+                          then x : myFilter2 pred xs
+                          else myFilter2 pred xs
+
+myZipWith3 :: (a -> b -> c -> d) -> [a] -> [b] -> [c] -> [d]
+myZipWith3 _ [] _ _ = []
+myZipWith3 _ _ [] _ = []
+myZipWith3 _ _ _ [] = []
+myZipWith3 f (x : xs) (y : ys) (z : zs) = f x y z : myZipWith3 f xs ys zs
+
+myAll :: (a -> Bool) -> [a] -> Bool
+myAll _ [] = True
+myAll pred (x : xs) | pred x = myAll pred xs
+                    | otherwise = False
+
+myAny :: (a -> Bool) -> [a] -> Bool
+myAny _ [] = False
+myAny pred (x : xs) | pred x = True
+                    | otherwise = myAny pred xs
+
+myComposition :: (b -> c) -> (a -> b) -> a -> c
+myComposition f g x = f (g x) 
 {-
 
 Напишите реализацию функций myFST, mySND, myTHRD для кортежа (a,b,c)
