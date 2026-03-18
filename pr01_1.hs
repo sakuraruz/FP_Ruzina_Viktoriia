@@ -52,6 +52,11 @@ myZip3 [] _ _ = []
 myZip3 _ [] _ = []
 myZip3 _ _ [] = []
 myZip3 (x:xs) (y:ys) (z:zs) = (x, y, z) : myZip3 xs ys zs
+
+myUnzip :: [(a, b)] -> ([a], [b])
+myUnzip [] = ([], [])
+myUnzip ((x, y) : xys) = (x : xs, y : ys)
+    where (xs, ys) = myUnzip xys
 {-
 
 Напишите реализацию функций myFST, mySND, myTHRD для кортежа (a,b,c)
