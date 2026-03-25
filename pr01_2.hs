@@ -28,6 +28,13 @@ myFoldr1 :: (a -> a -> a) -> [a] -> a
 myFoldr1 _ [] = error "Пустой список"
 myFoldr1 pred [x] = x
 myFoldr1 pred (x:xs) = pred x (myFoldr1 pred xs)
+
+myTakeWhile :: (a -> Bool) -> [a] -> [a]
+myTakeWhile pred (x:xs) | pred x = x : myTakeWhile pred xs
+                        | otherwise = []
+
+mySpan :: (a -> Bool) -> [a] -> ([a], [a])
+mySpan pred = foldr (\x (ys, zs) -> if pred x then (x:ys, zs) else ([], x:ys)) ([], [])
 {-
 
 Напишите реализацию функций:
