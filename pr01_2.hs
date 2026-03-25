@@ -11,6 +11,11 @@ myZipSave (x:xs) (y:ys) = ((x,y):pairs, remainder)
   where
     (pairs, remainder) = myZipSave xs ys
 
+myUnzipSave :: ([(a, b)], Either [a] [b]) -> ([a], [b])
+myUnzipSave ([], Left x) = (x,[]) 
+myUnzipSave ([], Right x) = ([],x) 
+myUnzipSave ((x, y) : xys, z) = (x : xs, y : ys)
+  where (xs, ys) = myUnzipSave (xys, z)
 {-
 
 Напишите реализацию функций:
