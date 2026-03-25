@@ -16,6 +16,18 @@ myUnzipSave ([], Left x) = (x,[])
 myUnzipSave ([], Right x) = ([],x) 
 myUnzipSave ((x, y) : xys, z) = (x : xs, y : ys)
   where (xs, ys) = myUnzipSave (xys, z)
+
+myRevers :: [a] -> [a]
+myRevers = foldl (flip (:)) []
+
+myFoldl1 :: (a -> a -> a) -> [a] -> a
+myFoldl1 _ [] = error "Пустой список"
+myFoldl1 pred (x:xs) = foldl pred x xs
+
+myFoldr1 :: (a -> a -> a) -> [a] -> a
+myFoldr1 _ [] = error "Пустой список"
+myFoldr1 pred [x] = x
+myFoldr1 pred (x:xs) = pred x (myFoldr1 pred xs)
 {-
 
 Напишите реализацию функций:
