@@ -1,7 +1,6 @@
 -------------------------------------
 -- Практические задание 1. Часть 2 --
 -------------------------------------
-
 module Pr01_2 where
 
 myZipSave :: [a] -> [b] -> ([(a, b)], Either [a] [b])
@@ -35,6 +34,18 @@ myTakeWhile pred (x:xs) | pred x = x : myTakeWhile pred xs
 
 mySpan :: (a -> Bool) -> [a] -> ([a], [a])
 mySpan pred = foldr (\x (ys, zs) -> if pred x then (x:ys, zs) else ([], x:ys)) ([], [])
+
+data MyMaybe x = MyNothing | MyJust x deriving (Show)
+
+data MyList a = MyEmpty | MyCons a (MyList a) deriving Show
+myMap :: (a -> b) -> MyList a -> MyList b
+myMap _ MyEmpty = MyEmpty
+myMap f (MyCons head tail) = MyCons (f head) (myMap f tail)
+
+myUnFoldr :: (b -> Maybe (a, b)) -> b -> [a]
+myUnFoldr f x = next (f x)
+  where next Nothing = []
+        next (Just (x, nextX)) = x : myUnFoldr f nextX
 {-
 
 Напишите реализацию функций:
