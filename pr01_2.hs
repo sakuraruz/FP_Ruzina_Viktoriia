@@ -68,3 +68,33 @@ myUnzipSave ( myZipSave [...] [...]) должно работать
     -- Обработку недостатка или отсутствия ингредиентов
 
 -}
+
+data IngredientsName = Oil | Chocolate | Strawberry | Mango | Egg | Flour | Shugar | BakingPowder deriving Show
+data Ingredients = Ingredients {oil :: Int  
+                              , chocolate :: Int
+                              , strawberry :: Int
+                              , mango :: Int
+                              , egg :: Int
+                              , flour :: Int
+                              , sugar :: Int
+                              , bakingPowder :: Int}
+
+data FillingMix = OilChocolateMix | OilStrawberryMix | OilMangoMix deriving Show
+data Dough = CakeDough deriving Show
+data CakeDough = ChocolateCakeDough | StrawberryCakeDough | MangoCakeDough deriving Show
+data Cake = ChocolateCake | StrawberryCake | MangoCake deriving Show
+data Action = Bake deriving Show
+
+storeIng :: Ingredients
+storeIng = Ingredients {oil = 1000
+                      , chocolate = 100
+                      , strawberry = 80
+                      , mango = 90
+                      , egg = 15
+                      , flour = 900
+                      , sugar = 500
+                      , bakingPowder = 20}
+
+-- Функции, которые описывают процесс приготовления частей торта
+makeCakeMix :: (IngredientsName, Int) -> (IngredientsName, Int) -> FillingMix
+makeCakeMix (Oil, x) (Chocolate, y) = OilChocolateMix
